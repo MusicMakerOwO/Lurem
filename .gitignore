@@ -1,3 +1,15 @@
+# Database Files
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+
+# IDE files
+.idea/
+
+# Private config
+config.json
+.env
+
 # Logs
 logs
 *.log
