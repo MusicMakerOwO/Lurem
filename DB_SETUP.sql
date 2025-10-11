@@ -12,6 +12,14 @@ CREATE TABLE IF NOT EXISTS Modmail (
 	created_at INT NOT NULL
 ) STRICT;
 
+CREATE TABLE IF NOT EXISTS TemporaryRoles (
+    guild_id TEXT NOT NULL,
+    user_id TEXT NOT NULL,
+    role_id TEXT NOT NULL,
+    expires_at INTEGER NOT NULL,
+    PRIMARY KEY (guild_id, user_id, role_id)
+) STRICT;
+
 CREATE TABLE IF NOT EXISTS ServerSettings (
 	guild_id TEXT NOT NULL PRIMARY KEY,
 	help_channel_id TEXT NOT NULL
