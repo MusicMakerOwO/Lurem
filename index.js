@@ -46,6 +46,7 @@ const Debounce = require('./Utils/Debounce');
 const { RESPONSE_CACHE } = require('./Events/InteractionHandler');
 
 require('./Utils/ProcessHandler');
+const { StartTasks } = require("./Utils/Tasks/AutomaticTasks");
 
 const preloadEnd = process.hrtime.bigint();
 const preloadTime = Number(preloadEnd - preloadStart) / 1e6;
@@ -247,6 +248,8 @@ Log.info(`Logging in...`);
 client.login(client.config.TOKEN);
 client.on('ready', function () {
 	Log.custom(`Logged in as ${client.user.tag}!`, 0x7946ff);
+
+	StartTasks();
 
 	if (!config.HOT_RELOAD) {
 		Log.warn('Hot reload is disabled in config.json');
