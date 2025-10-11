@@ -6,7 +6,7 @@
 	"PREFIX": "!",
 
 	"HOT_RELOAD": false,
-	"PROCESS_HANDLERS": true,
+	"PROCESS_HANDLERS": false,
 	"CHECK_INTENTS": false,
 	"CHECK_EVENT_NAMES": true,
 	"REGISTER_COMMANDS": true,

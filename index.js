@@ -38,6 +38,8 @@ const EventLoader = require('./Utils/EventLoader');
 const RegisterCommands = require('./Utils/RegisterCommands');
 const FileWatch = require('./Utils/FileWatcher');
 const CheckIntents = require('./Utils/CheckIntents');
+const Task = require('./Utils/TaskScheduler');
+const Database = require('./Utils/Database');
 
 const { Client } = require('discord.js');
 const Debounce = require('./Utils/Debounce');
@@ -259,3 +261,29 @@ client.on('ready', function () {
 		watcher.onChange = callback;
 	}
 });
+
+async function Shutdown() {
+	console.log();
+
+	Log.warn('Shutting down...');
+	await client.destroy();
+
+	Log.warn('Stopping tasks...');
+	Task.destroy();
+
+	Log.warn('Closing database connection...');
+	Database.close();
+
+	process.exit(0);
+}
+
+
+process.on('SIGINT', Shutdown); // ctrl+c
+process.on('SIGTERM', Shutdown); // docker stop
+
+// ctrl+z is not a graceful shutdown, it's a pause but we don't want to pause lol
+process.on('SIGTSTP', Shutdown);
+
+// standard uncaught errors
+process.on('uncaughtException', Log.error);
+process.on('unhandledRejection', Log.error);
