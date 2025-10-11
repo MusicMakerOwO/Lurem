@@ -221,7 +221,12 @@ module.exports = {
 		return interaction.editReply({
 			embeds: [{
 				color: 0x00ff00,
-				description: `Gave \`@${role.name}\` to <@${user.id}> for \`${durationStr}\``
+				title: '✅ Temporary Role Assigned',
+				description: `
+**User:** <@${user.id}>
+**Role:** <@&${role.id}>
+**Duration:** \`${durationStr}\`
+-# Role will be automatically removed when the time expires.`
 			}]
 		});
 	}
