@@ -53,8 +53,9 @@ Log.custom(`Preload time: ${~~preloadTime}ms`, 0x7946ff);
 
 const client = new Client({
 	intents: [
+		'Guilds',
+		'GuildMembers',
 		'MessageContent',
-		'GuildMessages',
 		'DirectMessages'
 	]
 });
