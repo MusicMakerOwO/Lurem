@@ -276,6 +276,9 @@ async function Shutdown() {
 	Task.destroy();
 
 	Log.warn('Closing database connection...');
+	Database.pragma('analysis_limit = 8000');
+	Database.exec('ANALYZE'); // Optimise the database and add indecies
+	Database.exec('VACUUM'); // Clear dead space to reduce file size
 	Database.close();
 
 	process.exit(0);
