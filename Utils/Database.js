@@ -86,18 +86,4 @@ for (let i = 0; i < DBQueries.length; i++) {
 	}
 }
 
-Database.tables = new Set( Database.prepare("SELECT name FROM sqlite_master WHERE type='table'").all().map(row => row.name) );
-
-const queryCache = new Map(); // query -> prepared_statement
-
-const originalPrepare = Database.prepare.bind(Database);
-Database.prepare = function (query, force = false) {
-	if (!force && queryCache.has(query)) return queryCache.get(query);
-
-	const preparedStatement = originalPrepare(query);
-	if (!force) queryCache.set(query, preparedStatement);
-
-	return preparedStatement;
-}
-
 module.exports = Database;
