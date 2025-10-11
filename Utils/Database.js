@@ -72,7 +72,7 @@ const Database = new BetterSqlite3(DB_FILE);
 
 Database.pragma('foreign_keys = ON');
 Database.pragma('journal_mode = WAL');
-Database.pragma('cache_size = 50000');  // ~200MB cache
+Database.pragma('cache_size = -64000'); // 64MB cache
 Database.pragma('temp_store = MEMORY'); // Use memory for temporary tables
 Database.pragma('mmap_size = 268435456'); // 256MB memory map
 
