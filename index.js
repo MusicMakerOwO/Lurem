@@ -52,14 +52,7 @@ const preloadEnd = process.hrtime.bigint();
 const preloadTime = Number(preloadEnd - preloadStart) / 1e6;
 Log.custom(`Preload time: ${~~preloadTime}ms`, 0x7946ff);
 
-const client = new Client({
-	intents: [
-		'Guilds',
-		'GuildMembers',
-		'MessageContent',
-		'DirectMessages'
-	]
-});
+const client = require('./client');
 
 client.config = config;
 client.logs = Log;
