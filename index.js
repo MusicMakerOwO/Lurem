@@ -132,7 +132,7 @@ for (const [path, cache] of Object.entries(COMPONENT_FOLDERS)) {
 		delete PRESET_FILES[path];
 		continue;
 	}
-	
+
 	ComponentLoader(path, cache);
 	Log.debug(`Loaded ${cache.size} ${path.split('/')[1]}`);
 }
