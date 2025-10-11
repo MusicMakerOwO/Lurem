@@ -49,7 +49,7 @@ module.exports.StartTasks = async function StartTasks() {
 
 		const lastRun = selectQuery.pluck().get(name);
 		// rounding errors shouldn't be a concern because the exact second doesn't matter
-		const lastRunNumber = Number(lastRun);
+		const lastRunNumber = Number(lastRun) || -1;
 
 		const now = Date.now();
 		const timeSinceLastRun = Math.max(0, now - lastRunNumber);
