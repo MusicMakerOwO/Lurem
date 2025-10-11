@@ -1,6 +1,6 @@
 const { Client } = require('discord.js');
 
-moddule.exports = new Client({
+module.exports = new Client({
 	intents: [
 		'Guilds',
 		'GuildMembers',
