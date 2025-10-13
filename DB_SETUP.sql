@@ -22,5 +22,6 @@ CREATE TABLE IF NOT EXISTS TemporaryRoles (
 
 CREATE TABLE IF NOT EXISTS ServerSettings (
 	guild_id TEXT NOT NULL PRIMARY KEY,
-	help_channel_id TEXT NOT NULL
+	help_channel_id TEXT NOT NULL,
+    solved_tag_id TEXT NOT NULL
 ) STRICT;
