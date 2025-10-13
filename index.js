@@ -44,6 +44,7 @@ const Database = require('./Utils/Database');
 const { Client } = require('discord.js');
 const Debounce = require('./Utils/Debounce');
 const { RESPONSE_CACHE } = require('./Events/InteractionHandler');
+const GuildJoin = require('./Events/GuildJoin');
 
 require('./Utils/ProcessHandler');
 const { StartTasks } = require("./Utils/Tasks/AutomaticTasks");
@@ -241,6 +242,10 @@ Log.info(`Logging in...`);
 client.login(client.config.TOKEN);
 client.on('ready', function () {
 	Log.custom(`Logged in as ${client.user.tag}!`, 0x7946ff);
+
+	for (const guild of client.guilds.cache.values()) {
+		GuildJoin.execute(client, guild);
+	}
 
 	StartTasks();
 
