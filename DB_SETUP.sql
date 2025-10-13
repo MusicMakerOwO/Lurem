@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS TemporaryRoles (
     PRIMARY KEY (guild_id, user_id, role_id)
 ) STRICT;
 
-CREATE TABLE IF NOT EXISTS ServerSettings (
+CREATE TABLE IF NOT EXISTS GuildSettings (
 	guild_id TEXT NOT NULL PRIMARY KEY,
 	help_channel_id TEXT NOT NULL,
     solved_tag_id TEXT NOT NULL
