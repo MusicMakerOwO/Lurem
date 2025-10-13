@@ -40,8 +40,6 @@ const FileWatch = require('./Utils/FileWatcher');
 const CheckIntents = require('./Utils/CheckIntents');
 const Task = require('./Utils/TaskScheduler');
 const Database = require('./Utils/Database');
-
-const { Client } = require('discord.js');
 const Debounce = require('./Utils/Debounce');
 const { RESPONSE_CACHE } = require('./Events/InteractionHandler');
 const GuildJoin = require('./Events/GuildJoin');
