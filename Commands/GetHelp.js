@@ -10,7 +10,8 @@ module.exports = {
 		return getHelp.execute(interaction, client, [
 			'1385212054041923601', // head admin
 			'1389787464813514774', // moderator
-			'1427890838373007462' // helper
+			'1427890838373007462', // helper
+			'846774996370325525'
 		]);
 	}
 }

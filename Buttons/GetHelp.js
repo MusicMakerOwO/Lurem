@@ -34,7 +34,7 @@ module.exports = {
 			const role = interaction.guild.roles.cache.get(roleID);
 			if (!role) continue;
 
-			const membersWithRole = role.members.filter(m => !m.user.bot);
+			const membersWithRole = role.members;
 
 			for (const member of membersWithRole.values()) {
 				const presence = interaction.guild.presences.cache.get(member.id) ?? { status: 'offline' };
@@ -62,16 +62,13 @@ module.exports = {
 		}
 
 		return interaction.editReply({
-			embeds: [{
-				color: 0x00ff00,
-				description: `
+			content: `
 **Assistance Requested** • <@${interaction.user.id}>
 While you wait, please list your issue in detail!
 Be patient and we will respond as soon as we can.
 
 **Available Staff**
 ${usersToPing.map(id => `\\> <@${id}>`).join('\n')}`
-			}]
 		});
 	}
 }
