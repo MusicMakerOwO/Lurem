@@ -6,7 +6,8 @@ module.exports = new Client({
 		'GuildMembers',
 		'GuildMessages',
 		'MessageContent',
-		'DirectMessages'
+		'DirectMessages',
+		'GuildPresences'
 	],
 	// DJS doesn't take string inputs like intents
 	// This is partials for channels and messages, required for DMs
