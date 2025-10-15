@@ -23,6 +23,9 @@ CREATE TABLE IF NOT EXISTS TemporaryRoles (
 
 CREATE TABLE IF NOT EXISTS GuildSettings (
 	guild_id TEXT NOT NULL PRIMARY KEY,
+
+    modmail_channel_id TEXT, -- Channel where modmail threads are created
+
 	help_channel_id TEXT,
     solved_tag_id TEXT
 ) STRICT;
