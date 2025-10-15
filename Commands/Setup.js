@@ -7,6 +7,10 @@ module.exports = {
 		.addSubcommand(x => x
 			.setName('help-channel')
 			.setDescription('Set up a help channel')
+		)
+		.addSubcommand(x => x
+			.setName('modmail')
+			.setDescription('Set up modmail')
 		),
 	async execute(interaction, client) {
 		if (!interaction.member.permissions.has('ManageGuild')) {
@@ -23,6 +27,10 @@ module.exports = {
 		switch (interaction.options.getSubcommand()) {
 			case 'help-channel': {
 				const button = client.buttons.get('setup-help-channel');
+				return button.execute(interaction, client, []);
+			}
+			case 'modmail': {
+				const button = client.buttons.get('setup-modmail');
 				return button.execute(interaction, client, []);
 			}
 			default: {
