@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS Modmail (
 	user_id TEXT NOT NULL UNIQUE,
 	created_at INT NOT NULL
 ) STRICT;
+CREATE INDEX IF NOT EXISTS idx_user_id ON Modmail (user_id);
 
 CREATE TABLE IF NOT EXISTS TemporaryRoles (
     guild_id TEXT NOT NULL,
