@@ -1,6 +1,7 @@
 const Database = require('../Utils/Database');
 
 module.exports = {
+	cooldown: 600, // 10 minutes
 	customID: 'get-help',
 	async execute(interaction, client, roleIDs = []) {
 		if (roleIDs.length === 0) throw new Error('No help roles provided');
