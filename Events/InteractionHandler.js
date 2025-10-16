@@ -88,7 +88,7 @@ async function InteractionHandler(client, interaction, type, cache) {
 	}
 
 	try {
-		if (component.cooldown) CheckCooldown(client, interaction.guildId, interaction.userId, name, component.cooldown);
+		if (component.cooldown) CheckCooldown(client, interaction.guildId, interaction.userId, interaction.type, name, component.cooldown);
 		if (component.guilds) 	IDAccess(component.guilds, interaction.guildId, 'Guild');
 		if (component.channels) IDAccess(component.channels, interaction.channelId, 'Channel');
 		if (component.users) 	IDAccess(component.users, interaction.user.id, 'User');
