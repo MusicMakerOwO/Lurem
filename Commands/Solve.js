@@ -17,6 +17,26 @@ module.exports = {
 			});
 		}
 
+		if (interaction.channel.parentId !== ChannelSettings.help_channel_id) {
+			return interaction.reply({
+				embeds: [{
+					color: 0xff0000,
+					description: `You can only use this in a thread under <#${ChannelSettings.help_channel_id}>`
+				}],
+				ephemeral: true
+			});
+		}
+
+		if (interaction.userId !== interaction.channel.ownerId) {
+			return interaction.reply({
+				embeds: [{
+					color: 0xff0000,
+					description: 'Only the help channel owner can use this'
+				}],
+				ephemeral: true
+			});
+		}
+
 		await interaction.deferReply();
 
 		// set the tag to solved
