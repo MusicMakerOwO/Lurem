@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
+	cooldown: 600, // 10 minutes
 	aliases: ['get-help'],
 	data: new SlashCommandBuilder()
 		.setName('get-help')
