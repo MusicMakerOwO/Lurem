@@ -88,7 +88,7 @@ async function InteractionHandler(client, interaction, type, cache) {
 	}
 
 	try {
-		if (component.cooldown) CheckCooldown(client, interaction.user.id, name, component.cooldown);
+		if (component.cooldown) CheckCooldown(client, interaction.guildId, interaction.userId, name, component.cooldown);
 		if (component.guilds) 	IDAccess(component.guilds, interaction.guildId, 'Guild');
 		if (component.channels) IDAccess(component.channels, interaction.channelId, 'Channel');
 		if (component.users) 	IDAccess(component.users, interaction.user.id, 'User');
@@ -150,7 +150,7 @@ async function InteractionHandler(client, interaction, type, cache) {
 
 	try {
 		const callback = interaction.isAutocomplete() ? component.autocomplete : component.execute;
-		if (typeof callback !== 'function') throw new 'Command not implemented';
+		if (typeof callback !== 'function') throw 'Command not implemented';
 		await callback(interaction, client, type === 'commands' ? undefined : args);
 		clearTimeout(timeout);
 	} catch (error) {
