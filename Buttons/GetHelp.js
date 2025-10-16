@@ -17,7 +17,7 @@ module.exports = {
 			});
 		}
 
-		if (interaction.channel.id !== HelpChannelID && interaction.channel.parentId !== HelpChannelID) {
+		if (interaction.channel.parentId !== HelpChannelID) {
 			return interaction.reply({
 				embeds: [{
 					color: 0xff0000,
