@@ -27,6 +27,16 @@ module.exports = {
 			});
 		}
 
+		if (interaction.userId !== interaction.channel.ownerId) {
+			return interaction.reply({
+				embeds: [{
+					color: 0xff0000,
+					description: 'Only the help channel owner can use this'
+				}],
+				ephemeral: true
+			});
+		}
+
 		// there's no fetching below - just cache and filter - but I don't trust it to be instant
 		await interaction.deferReply().catch( () => {} );
 
