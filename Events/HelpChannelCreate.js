@@ -1,7 +1,6 @@
 const Database = require('../Utils/Database');
 
 module.exports = {
-	name: 'channelCreate',
 	async execute(channel, client) {
 		if (channel.type !== 15) return; // Not a forum channel
 
