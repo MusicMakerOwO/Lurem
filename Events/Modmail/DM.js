@@ -6,22 +6,25 @@ module.exports = {
 		if (message.author.bot) return;
 		if (message.guild !== null) return;
 
+		const attachmentUrls = Array.from(message.attachments.values()).map(a => a.url);
+		const content = message.content + (attachmentUrls.length > 0 ? `\n\n${attachmentUrls.join('\n')}` : '');
+
+		const messageEmbed = {
+			color: 0xffff00,
+			author: {
+				name: `${message.author.tag} (${message.author.id})`,
+				icon_url: message.author.displayAvatarURL({ dynamic: true })
+			},
+			description: content || '[ Something went wrong! ]',
+		};
+
 		const ActiveModmail = Database.prepare("SELECT channel_id FROM Modmail WHERE user_id = ?").get(message.author.id);
 		if (ActiveModmail) {
 			const ModmailChannel = client.channels.cache.get(ActiveModmail.channel_id);
 			if (!ModmailChannel) throw new Error(`Modmail channel not found for user ID ${message.author.id}`);
 
 			try {
-				await ModmailChannel.send({
-					embeds: [{
-						color: 0xffff00,
-						author: {
-							name: `${message.author.tag} (${message.author.id})`,
-							icon_url: message.author.displayAvatarURL({ dynamic: true })
-						},
-						description: message.content || '[No Text Content]',
-					}]
-				})
+				await ModmailChannel.send({ embeds: [messageEmbed] });
 				message.react('✅');
 			} catch (error) {
 				console.log(error);
@@ -70,20 +73,7 @@ While you wait for a staff member to respond, **please describe your issue in de
 				}]
 			});
 
-			const attachmentUrls = Array.from(message.attachments.values()).map(a => a.url);
-			const content = message.content + (attachmentUrls.length > 0 ? `\n\n${attachmentUrls.join('\n')}` : '');
-
-			await thread.send({
-				embeds: [{
-					color: 0xffff00,
-					author: {
-						name: `${message.author.tag} (${message.author.id})`,
-						icon_url: message.author.displayAvatarURL({ dynamic: true })
-					},
-					description: content || '[ Something went wrong! ]',
-				}]
-			});
-
+			await thread.send({ embeds: [messageEmbed] });
 			message.react('✅');
 		} catch (error) {
 			console.log(error);
