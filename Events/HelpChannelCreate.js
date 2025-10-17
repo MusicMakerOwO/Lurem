@@ -24,7 +24,9 @@ module.exports = {
 			]
 		}
 
-		await channel.send({
+		await new Promise( r => setTimeout(r, 3000) ); // wait 3 seconds to ensure thread is ready
+
+		await thread.send({
 			embeds: [{
 				color: 0xffff00,
 				title: 'Welcome to the help channel!',
