@@ -1,10 +1,29 @@
 const CanUserManageThread = require('../Utils/CanUserManageThread.js');
+const { STAFF_ROLES } = require("../Utils/Constants");
+const SecondsToTime = require('../Utils/SecondsToTime.js');
+
+const cooldown = new Map(); // userID -> last run timestamp
+
+const COMMANED_COOLDOWN = 1000 * 60 * 10; // 10 minutes
 
 module.exports = {
-	cooldown: 600, // 10 minutes
 	customID: 'get-help',
 	async execute(interaction, client, roleIDs = []) {
-		if (roleIDs.length === 0) throw new Error('No help roles provided');
+		if (roleIDs.length === 0) roleIDs = STAFF_ROLES;
+
+		const lastRun = cooldown.get(interaction.user.id) || 0;
+		const now = Date.now();
+		if (now - lastRun < COMMANED_COOLDOWN) {
+			const timeLeft = Math.ceil((COMMANED_COOLDOWN - (now - lastRun)) / 1000);
+			return interaction.reply({
+				embeds: [{
+					color: 0xffa500,
+					description: `You can only use this button once every 10 minutes. Please wait ${SecondsToTime(timeLeft)} before trying again.`
+				}],
+				ephemeral: true
+			});
+		}
+		cooldown.set(interaction.user.id, now);
 
 		const canManage = CanUserManageThread(
 			interaction.user.id,
