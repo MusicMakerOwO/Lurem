@@ -40,8 +40,8 @@ module.exports = {
 
 		// wait 10 seconds before closing the thread
 		setTimeout(async () => {
-			await interaction.channel.setArchived(true, 'Marked as solved');
 			await interaction.channel.setLocked(true, 'Marked as solved');
+			await interaction.channel.setArchived(true, 'Marked as solved');
 		}, 10_000);
 	}
 }
