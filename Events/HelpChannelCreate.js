@@ -1,11 +1,10 @@
 const Database = require('../Utils/Database');
 
 module.exports = {
-	async execute(channel, client) {
-		if (channel.type !== 15) return; // Not a forum channel
-
-		const helpChannelID = Database.prepare("SELECT help_channel_id FROM GuildSettings WHERE guild_id = ?").pluck().get(channel.guild.id);
-		if (channel.parentId !== helpChannelID) return; // Not within the help channel
+	name: 'threadCreate',
+	async execute(client, thread) {
+		const helpChannelID = Database.prepare("SELECT help_channel_id FROM GuildSettings WHERE guild_id = ?").pluck().get(thread.guild.id);
+		if (thread.parentId !== helpChannelID) return; // Not within the help channel
 
 		const buttons = {
 			type: 1,
