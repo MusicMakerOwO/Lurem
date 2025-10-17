@@ -60,18 +60,6 @@ The staff ping have just been pinged and will be with you shortly.
 While you wait, **please describe your issue in detail.**`,
 				}]
 			});
-			await thread.send({
-				content: `**New Modmail** • <@${message.author.id}>`,
-				embeds: [{
-					color: 0xffff00,
-					title: 'New Modmail',
-					description: `
-A new modmail has been created for <@${message.author.id}>.
-Please assist them as soon as possible.
-
-While you wait for a staff member to respond, **please describe your issue in detail.**`,
-				}]
-			});
 
 			await thread.send({ embeds: [messageEmbed] });
 			message.react('✅');
