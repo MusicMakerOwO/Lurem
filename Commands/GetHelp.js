@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require('discord.js');
 const { STAFF_ROLES } = require('../Utils/Constants.js');
 
 module.exports = {
-	aliases: ['get-help'],
+	aliases: ['gethelp'],
 	data: new SlashCommandBuilder()
 		.setName('get-help')
 		.setDescription('Get help with using the bot'),
