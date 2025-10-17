@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
+const Database = require('../Utils/Database.js');
 const UserCanManageThread = require('../Utils/CanUserManageThread.js');
 
 module.exports = {
@@ -24,8 +25,10 @@ module.exports = {
 
 		await interaction.deferReply();
 
+		const solvedTagID = Database.prepare("SELECT solved_tag_id FROM GuildSettings WHERE guild_id = ?").pluck().get(interaction.guild.id);
+
 		// set the tag to solved
-		await interaction.channel.setAppliedTags([ChannelSettings.solved_tag_id]);
+		await interaction.channel.setAppliedTags([solvedTagID]);
 
 		await interaction.editReply({
 			embeds: [{
