@@ -15,9 +15,9 @@ module.exports = {
 		if (!User) return message.react('❌');
 
 		const attachmentUrls = Array.from(message.attachments.values()).map(a => a.url);
+		const content = message.content + (attachmentUrls.length > 0 ? `\n\n${attachmentUrls.join('\n')}` : '');
 
 		try {
-			const content = message.content + (attachmentUrls.length > 0 ? `\n\n${attachmentUrls.join('\n')}` : '');
 			await User.send({
 				embeds: [{
 					color: 0xffff00,
