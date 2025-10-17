@@ -9,7 +9,7 @@ module.exports = {
 		const ActiveModmail = Database.prepare("SELECT user_id FROM Modmail WHERE channel_id = ?").get(message.channelId);
 		if (!ActiveModmail) return;
 
-		const StaffRole = message.author.roles.highest.name;
+		const StaffRole = message.member.roles.highest.name;
 		const User = await client.users.cache.get(ActiveModmail.user_id);
 
 		if (!User) return message.react('❌');
