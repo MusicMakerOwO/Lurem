@@ -1,37 +1,22 @@
 const { SlashCommandBuilder } = require('discord.js');
-const Database = require('../Utils/Database.js');
+const UserCanManageThread = require('../Utils/CanUserManageThread.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('solve')
 		.setDescription('Mark the thread as solved'),
 	async execute(interaction) {
-		const ChannelSettings = Database.prepare("SELECT help_channel_id, solved_tag_id FROM GuildSettings WHERE guild_id = ?").get(interaction.guild.id);
-		if (!ChannelSettings || !ChannelSettings.help_channel_id || !ChannelSettings.solved_tag_id) {
+		const canManage = UserCanManageThread(
+			interaction.user.id,
+			interaction.channel.ownerId,
+			interaction.channel.parentId,
+			Array.from(interaction.member.roles.cache.keys())
+		);
+		if (typeof canManage === 'string') {
 			return interaction.reply({
 				embeds: [{
 					color: 0xff0000,
-					description: 'This server has not set up a help channel yet. Please run `/setup help-channel` to start the process.'
-				}],
-				ephemeral: true
-			});
-		}
-
-		if (interaction.channel.parentId !== ChannelSettings.help_channel_id) {
-			return interaction.reply({
-				embeds: [{
-					color: 0xff0000,
-					description: `You can only use this in a thread under <#${ChannelSettings.help_channel_id}>`
-				}],
-				ephemeral: true
-			});
-		}
-
-		if (interaction.userId !== interaction.channel.ownerId) {
-			return interaction.reply({
-				embeds: [{
-					color: 0xff0000,
-					description: 'Only the help channel owner can use this'
+					description: canManage
 				}],
 				ephemeral: true
 			});

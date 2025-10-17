@@ -1,4 +1,4 @@
-const Database = require('../Utils/Database');
+const CanUserManageThread = require('../Utils/CanUserManageThread.js');
 
 module.exports = {
 	cooldown: 600, // 10 minutes
@@ -6,32 +6,17 @@ module.exports = {
 	async execute(interaction, client, roleIDs = []) {
 		if (roleIDs.length === 0) throw new Error('No help roles provided');
 
-		const HelpChannelID = Database.prepare("SELECT help_channel_id FROM GuildSettings WHERE guild_id = ?").pluck().get(interaction.guild.id);
-		if (!HelpChannelID) {
+		const canManage = CanUserManageThread(
+			interaction.user.id,
+			interaction.channel.ownerId,
+			interaction.channel.parentId,
+			Array.from(interaction.member.roles.cache.keys())
+		);
+		if (typeof canManage === 'string') {
 			return interaction.reply({
 				embeds: [{
 					color: 0xff0000,
-					description: 'The help channel has not been set up yet. Please use `/setup help-channel` to start the process.'
-				}],
-				ephemeral: true
-			});
-		}
-
-		if (interaction.channel.parentId !== HelpChannelID) {
-			return interaction.reply({
-				embeds: [{
-					color: 0xff0000,
-					description: `You can only use this in <#${HelpChannelID}>`
-				}],
-				ephemeral: true
-			});
-		}
-
-		if (interaction.userId !== interaction.channel.ownerId) {
-			return interaction.reply({
-				embeds: [{
-					color: 0xff0000,
-					description: 'Only the help channel owner can use this'
+					description: canManage
 				}],
 				ephemeral: true
 			});
