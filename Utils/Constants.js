@@ -14,6 +14,14 @@ const SECONDS = {
 
 const CORES_AVAILABLE = require('os').cpus().length;
 
+const STAFF_ROLES = [
+	'1385212054041923601', // head admin
+	'1389787464813514774', // moderator
+	'1427890838373007462', // helper
+
+	'846774996370325525' // my test role lol
+]
+
 module.exports = {
 	ROOT_FOLDER,
 
@@ -21,6 +29,8 @@ module.exports = {
 	DB_FILE,
 
 	SECONDS,
-	
-	CORES_AVAILABLE
+
+	CORES_AVAILABLE,
+
+	STAFF_ROLES
 }

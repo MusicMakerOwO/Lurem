@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
+const { STAFF_ROLES } = require('../Utils/Constants.js');
 
 module.exports = {
 	aliases: ['get-help'],
@@ -7,11 +8,6 @@ module.exports = {
 		.setDescription('Get help with using the bot'),
 	async execute(interaction, client) {
 		const getHelp = client.buttons.get('get-help');
-		return getHelp.execute(interaction, client, [
-			'1385212054041923601', // head admin
-			'1389787464813514774', // moderator
-			'1427890838373007462', // helper
-			'846774996370325525'
-		]);
+		return getHelp.execute(interaction, client, STAFF_ROLES);
 	}
 }
