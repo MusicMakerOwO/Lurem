@@ -55,7 +55,7 @@ module.exports = {
 					title: 'Modmail Created',
 					description: `
 A new modmail has been created for you.
-The staff ping has just been pinged and will be with you shortly.
+The staff ping have just been pinged and will be with you shortly.
 
 While you wait, **please describe your issue in detail.**`,
 				}]
