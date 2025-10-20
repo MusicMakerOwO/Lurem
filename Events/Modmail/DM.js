@@ -16,7 +16,7 @@ module.exports = {
 				icon_url: message.author.displayAvatarURL({ dynamic: true })
 			},
 			description: content || '[ Something went wrong! ]',
-		};
+		}
 
 		const ActiveModmail = Database.prepare("SELECT channel_id FROM Modmail WHERE user_id = ?").get(message.author.id);
 		if (ActiveModmail) {
@@ -49,7 +49,17 @@ module.exports = {
 			});
 			Database.prepare("INSERT INTO Modmail (user_id, channel_id) VALUES (?, ?)").run(message.author.id, thread.id);
 
-			await message.author.send({
+			const closeButton = {
+				type: 1,
+				components: [{
+					type: 2,
+					label: 'Close Modmail',
+					style: 4,
+					custom_id: 'modmail-close'
+				}]
+			};
+
+			message.author.send({
 				embeds: [{
 					color: 0xffff00,
 					title: 'Modmail Created',
@@ -58,10 +68,11 @@ A new modmail has been created for you.
 The staff ping have just been pinged and will be with you shortly.
 
 While you wait, **please describe your issue in detail.**`,
-				}]
+				}],
+				components: [closeButton]
 			});
 
-			await thread.send({ embeds: [messageEmbed] });
+			await thread.send({ embeds: [messageEmbed], components: [closeButton] });
 			message.react('✅');
 		} catch (error) {
 			console.log(error);
