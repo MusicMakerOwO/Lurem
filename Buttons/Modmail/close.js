@@ -8,7 +8,7 @@ module.exports = {
 			return interaction.reply({
 				embeds: [{
 					color: 0xff0000,
-					description: '❌ This channel is not an active modmail thread.'
+					description: '❌ This channel is not an active modmail.'
 				}],
 				ephemeral: true
 			});
@@ -19,15 +19,15 @@ module.exports = {
 		const staffEmbed = {
 			color: 0xff0000,
 			description: userClosed ?
-				`**The user has closed the modmail thread.**` :
+				`**The user has closed the modmail.**` :
 				`**This modmail has been closed** - <@${interaction.user.id}>`
 		}
 
 		const userEmbed = {
 			color: 0xff0000,
 			description: userClosed ?
-				`You have closed the modmail thread. If you need further assistance, feel free to open a new thread.` :
-				`A staff member has closed the modmail thread. If you need further assistance, feel free to open a new thread.`
+				`You have closed the modmail. If you need further assistance, feel free to open a new one.` :
+				`A staff member has closed the modmail. If you need further assistance, feel free to open a new one.`
 		}
 
 		const channel = client.channels.cache.get(modmailData.channel_id);
@@ -39,7 +39,7 @@ module.exports = {
 
 		const timeoutEmbed = {
 			color: 0xffa500,
-			description: `**This modmail thread will be closed in 10 seconds ...**`
+			description: `**This modmail will be closed in 10 seconds ...**`
 		}
 
 		if (channel) channel.send({ embeds: [timeoutEmbed] }).catch(console.log);
@@ -56,7 +56,7 @@ module.exports = {
 				user.send({
 					embeds: [{
 						color: 0x00ff00,
-						description: '**The modmail thread has been closed successfully.**'
+						description: '**The modmail has been closed successfully.**'
 					}]
 				}).catch(console.log);
 			}
