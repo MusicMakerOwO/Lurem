@@ -1,7 +1,7 @@
 const Database = require('../../Utils/Database');
 
 module.exports = {
-	customId: 'modmail-close',
+	customID: 'modmail-close',
 	async execute(interaction, client) {
 		const modmailData = Database.prepare("SELECT user_id, channel_id FROM Modmail WHERE (user_id = ? OR channel_id = ?)").get(interaction.user.id, interaction.channel.id);
 		if (!modmailData) {
