@@ -3,7 +3,7 @@ const Database = require('../../Utils/Database');
 module.exports = {
 	customID: 'modmail-close',
 	async execute(interaction, client) {
-		const modmailData = Database.prepare("SELECT user_id, channel_id FROM Modmail WHERE (user_id = ? OR channel_id = ?)").get(interaction.user.id, interaction.channel.id);
+		const modmailData = Database.prepare("SELECT user_id, channel_id FROM Modmail WHERE (user_id = ? OR channel_id = ?)").get(interaction.user.id, interaction.channelId);
 		if (!modmailData) {
 			return interaction.reply({
 				embeds: [{
