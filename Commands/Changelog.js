@@ -1,10 +1,9 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { COLOR } = require('../Utils/Constants');
 
 const CHANGELOG = {
 	"v0.1.0": {
 		date: "2025 October 12th",
-		changed: [
+		changes: [
 			"Added this changelog command"
 		]
 	}
@@ -14,8 +13,6 @@ const OLDEST_VERSION = Object.keys(CHANGELOG).sort((a, b) => a.localeCompare(b))
 const LATEST_VERSION = Object.keys(CHANGELOG).sort((a, b) => b.localeCompare(a))[0];
 
 module.exports = {
-	LATEST_VERSION,
-	bypass: true,
 	data: new SlashCommandBuilder()
 		.setName('changelog')
 		.setDescription('New here? Check out what has changed!')
@@ -35,7 +32,7 @@ module.exports = {
 		if (input === 'all') {
 			// show all versions
 			const embed = {
-				color: COLOR.PRIMARY,
+				color: 0xffff00,
 				title: `Fox Box Insurance : Historical Changelogs`,
 				description: ''
 			}
@@ -62,7 +59,7 @@ module.exports = {
 		}
 
 		const embed = {
-			color: COLOR.PRIMARY,
+			color: 0xffff00,
 			title: `Lurem : ${version}`,
 			description: `
 Updated: \`${data.date}\`
