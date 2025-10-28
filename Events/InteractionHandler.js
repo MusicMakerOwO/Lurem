@@ -145,7 +145,7 @@ async function InteractionHandler(client, interaction, type, cache) {
 		var timeout = setTimeout(async () => {
 			if (interaction.deferred || interaction.replied) return;
 			await interaction.deferReply();
-		}, 1000);
+		}, 2000);
 	}
 
 	try {
