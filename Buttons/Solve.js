@@ -22,6 +22,8 @@ module.exports = {
 
 		await interaction.deferReply();
 
+		Database.prepare("DELETE FROM ActiveHelpChannels WHERE channel_id = ?").run(interaction.channel.id);
+
 		const solvedTagID = Database.prepare("SELECT solved_tag_id FROM GuildSettings WHERE guild_id = ?").pluck().get(interaction.guild.id);
 
 		// set the tag to solved
@@ -31,10 +33,10 @@ module.exports = {
 			embeds: [{
 				color: 0xffff00,
 				description: `
-		**This thread has been marked as solved**
-		
-		This post will be closed shortly ...
-		Still need help? Open a new post!`
+**This thread has been marked as solved**
+
+This post will be closed shortly ...
+Still need help? Open a new post!`
 			}]
 		});
 

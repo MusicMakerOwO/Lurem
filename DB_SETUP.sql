@@ -29,3 +29,8 @@ CREATE TABLE IF NOT EXISTS GuildSettings (
 	help_channel_id TEXT,
     solved_tag_id TEXT
 ) STRICT;
+
+CREATE TABLE IF NOT EXISTS ActiveHelpChannels (
+    channel_id TEXT NOT NULL PRIMARY KEY,
+    last_message_timestamp INTEGER NOT NULL DEFAULT (UNIXEPOCH('now', 'localtime') * 1000)
+) STRICT;

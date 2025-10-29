@@ -6,6 +6,7 @@ module.exports = {
 		const helpChannelID = Database.prepare("SELECT help_channel_id FROM GuildSettings WHERE guild_id = ?").pluck().get(thread.guild.id);
 		if (thread.parentId !== helpChannelID) return; // Not within the help channel
 
+		Database.prepare("INSERT INTO ActiveHelpChannels (channel_id) VALUES (?)").run(thread.id);
 		const buttons = {
 			type: 1,
 			components: [
