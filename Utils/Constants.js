@@ -22,9 +22,10 @@ const STAFF_ROLES = [
 	'846774996370325525' // my test role lol
 ]
 
+const helpThreadTaskID = new Map(); // channel ID -> task ID
+
 module.exports = {
 	ROOT_FOLDER,
-
 	DB_SETUP_FILE,
 	DB_FILE,
 
@@ -32,5 +33,7 @@ module.exports = {
 
 	CORES_AVAILABLE,
 
-	STAFF_ROLES
+	STAFF_ROLES,
+
+	helpThreadTaskID
 }
