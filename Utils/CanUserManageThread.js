@@ -8,6 +8,9 @@ const HelpChannelSettings = Database.prepare("SELECT help_channel_id FROM GuildS
 
 module.exports = function CanUserManageThread(userID, threadOwnerID, threadParentID, roles = []) {
 
+	// the bot can manage everything
+	if (userID === config.APP_ID) return true;
+
 	const HelpChannelID = HelpChannelSettings.pluck().get(config.GUILD_ID);
 	if (!HelpChannelID) return 'The help channel has not been set up yet. Please use `/setup help-channel` to start the process.';
 
