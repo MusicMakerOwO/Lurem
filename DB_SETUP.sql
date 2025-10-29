@@ -9,7 +9,8 @@ CREATE TABLE IF NOT EXISTS Timers (
 CREATE TABLE IF NOT EXISTS Modmail (
 	channel_id TEXT NOT NULL PRIMARY KEY, -- Thread channel ID, parent channel can be found in GuildSettings.modmail_channel_id
 	user_id TEXT NOT NULL UNIQUE,
-	created_at INT NOT NULL DEFAULT (UNIXEPOCH('now', 'localtime') * 1000) -- store as ms (JS uses ms timestamps)
+	created_at INT NOT NULL DEFAULT (UNIXEPOCH('now', 'localtime') * 1000), -- store as ms (JS uses ms timestamps)
+    last_message_timestamp INT NOT NULL DEFAULT (UNIXEPOCH('now', 'localtime') * 1000)
 ) STRICT;
 CREATE INDEX IF NOT EXISTS idx_user_id ON Modmail (user_id);
 
