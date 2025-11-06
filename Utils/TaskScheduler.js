@@ -16,7 +16,7 @@ class TaskScheduler {
 
 		if (interval === undefined) interval = delay;
 
-		if (this.nextTaskID === NUMBER.MAX_SAFE_INTEGER) throw new Error('Too many scheduled tasks, cannot schedule more');
+		if (this.nextTaskID === Number.MAX_SAFE_INTEGER) throw new Error('Too many scheduled tasks, cannot schedule more');
 
 		const taskID = this.nextTaskID++;
 
